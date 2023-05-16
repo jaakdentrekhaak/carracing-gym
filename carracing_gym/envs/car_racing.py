@@ -63,13 +63,13 @@ import platform
 os_type = platform.system()
 if os_type == "Darwin":
     pass
-elif os_type == "Linux":
-    from pyvirtualdisplay import Display
-    Display(visible=0, size=(WINDOW_W, WINDOW_H)).start()
+# elif os_type == "Linux":
+#     from pyvirtualdisplay import Display
+#     Display(visible=0, size=(WINDOW_W, WINDOW_H)).start()
 
 SCALE = 6.0  # Track scale
-TRACK_RAD = 500 / SCALE  # Track is heavily morphed circle with this radius
-PLAYFIELD = 1200 / SCALE  # Game over boundary #2000
+TRACK_RAD = 900 / SCALE  # Track is heavily morphed circle with this radius
+PLAYFIELD = 2000 / SCALE  # Game over boundary #2000
 FPS = 50  # Frames per second
 ZOOM = 2.7  # Camera zoom #2.7
 ZOOM_FOLLOW = False  # Set to False for fixed view (don't use zoom)
@@ -981,6 +981,15 @@ class CarRacing(gym.Env, EzPickle):
         self.score_label.draw()
     def get_action_lookup(self):
         return ACTION_LOOKUP
+
+    def get_car_speed(self):
+        if not self.car:
+            return 0
+        true_speed = np.sqrt(
+            np.square(self.car.hull.linearVelocity[0])
+            + np.square(self.car.hull.linearVelocity[1])
+        )
+        return true_speed
 
 ACTION_LOOKUP = {
     0: 'do nothing',

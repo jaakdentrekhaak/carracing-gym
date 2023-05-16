@@ -1,0 +1,5 @@
+gym
+gym[box2d]
+pyglet
+pyvirtualdisplay
+swig

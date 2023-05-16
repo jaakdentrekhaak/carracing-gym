@@ -3,6 +3,7 @@ from setuptools import setup
 setup(name='carracing_gym',
       version='0.0.1',
       install_requires=[
+            'swig',
             'gym',
             'gym[box2d]',
             'pyglet',
